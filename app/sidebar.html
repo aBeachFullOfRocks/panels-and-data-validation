@@ -1,0 +1,83 @@
+<!--
+    This is the top level page
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sliding Panels Sidebar</title>
+    <base target="_top">
+    <link rel="stylesheet" href="https://ssl.gstatic.com/docs/script/css/add-ons.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-pageslide-directive/2.2.0/angular-pageslide-directive.min.js"></script>
+
+    <link rel="stylesheet" href="pageslide.css">
+    <script src="sidebarcontroller.js"></script>
+    <script src="slidecontroller.js"></script>
+</head>
+<body ng-app="sidebarApp" ng-controller="SidebarController as sidebar">
+
+    <div id="main_content_wrap" class="outer" style="padding:20px">
+        <header>
+        <h1>
+            Sliding Panels and Data Validation
+        </h1>
+        </header>
+
+        <section id="main_content" class="inner">
+
+            <div ng-controller="SlideController">
+                <div class="inline-element">
+                    <a class="button" href="" ng-click="toggle()">Contact</a>
+                    <div pageslide ps-open="checked" ps-speed="0.4" ps-size="50%">
+                        <div style="padding:20px" id="contact-panel">
+                            <h2>Contact</h2>
+
+                            <form name="contactform" novalidate ng-submit="contactform.$valid && toggle()">
+
+                                <label for="phone">
+                                    Phone Number
+                                </label>
+                                <p id="phone-hint" class="input-hint">
+                                    Example: <samp>(123) 456 7890</samp>
+                                </p>
+                                <input type="text" id="phone" aria-describedby="phone-hint" ng-model="sidebar.contact.phone" required>
+                                <br>
+
+                                <input type="button" ng-click="toggle()" value="Cancel">
+                                <input type="submit" value="Save">
+
+
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="inline-element">
+                    {{sidebar.status.contact}}
+                </div>
+            </div>
+
+            <div ng-controller="SlideController">
+                <a class="large button" href="" ng-click="toggle()">Details</a>
+                <div pageslide ps-open="checked" ps-speed="0.4" ps-size="50%">
+                    <div style="padding:20px" id="details-panel">
+                        <h2>Details</h2>
+                        <p>Put here whatever you want</p>
+                        <a ng-click="toggle()" class="button" >Close</a>
+                    </div>
+                </div>
+                <div class="inline-element">
+                    {{sidebar.status.details}}
+                </div>
+            </div>
+
+            <hr>
+            Do Not Track setting is: {{sidebar.configuration.doNotTrack}}
+
+        </section>
+    </div>
+
+</body>
+</html>
