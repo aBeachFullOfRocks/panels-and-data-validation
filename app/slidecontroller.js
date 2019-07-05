@@ -1,4 +1,17 @@
-var SlideController = function($scope, $window) {
+/**
+ * Declare our module to manage the sliding panels
+ */
+angular
+    .module('pageslide', ['pageslide-directive']);
+
+/**
+ * Define the sliding panel controller
+ */
+angular
+    .module('pageslide')
+    .controller('SlideController',SlideController);
+
+function SlideController ($scope, $window) {
     $scope.checked = false;
     $scope.size = '100px';
 
@@ -19,7 +32,4 @@ var SlideController = function($scope, $window) {
         alert('Close');
         console.log($scope);
     };
-};
-
-var module = angular.module('pageslide', ['pageslide-directive'])
-    .controller('SlideController',SlideController);
+}
