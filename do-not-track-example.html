@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+Using client-side solution from
+https://medium.com/farewill/how-to-detect-and-use-do-not-track-on-your-website-77f21f62be48
+and simplified to create a single file example with no dependencies.
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Do Not Track Example</title>
+    <style>
+        body {
+            background: white;
+            font-family: sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h1>Do Not Track Example</h1>
+</body>
+<script>
+    function isDoNotTrackEnabled () {
+        var doNotTrackOption = (
+            window.doNotTrack ||
+            window.navigator.doNotTrack ||
+            window.navigator.msDoNotTrack
+        );
+        if (!doNotTrackOption) {
+            return false;
+        } else if (doNotTrackOption.charAt(0) === '1' || doNotTrackOption === 'yes') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    var messageElement = document.createElement('p');
+    var status = isDoNotTrackEnabled()  ? 'enabled' : 'disabled';
+    messageElement.innerHTML = 'Browser setting says that Do Not Track is ' + status;
+    document.body.appendChild(messageElement)
+</script>
+</html>
